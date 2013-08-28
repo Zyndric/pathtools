@@ -16,11 +16,11 @@ functions, avoids state and tries to limit side effects to those required.
 Existing functions
 ------------------
 
-common_basepath Calculate base path common to several given paths.
-dirset          Return list of directories, recursively.
-fileset         Return list of files that match a pattern, recursing directories.
-fullfilec       Concatenate partial paths safely, on cell arrays.
-relpath         Calculate relative paths between given paths.
+- common_basepath Calculate base path common to several given paths.
+- dirset          Return list of directories, recursively.
+- fileset         Return list of files that match a pattern, recursing directories.
+- fullfilec       Concatenate partial paths safely, on cell arrays.
+- relpath         Calculate relative paths between given paths.
 
 
 Mutual dependencies
@@ -29,18 +29,18 @@ Mutual dependencies
 These functions try not to depend on each other, in order to use them in and
 distribute along other projects. Nevertheless, these dependencies exist:
 
-relpath --> common_basepath --> fullfilec
-fileset --> dirset
+- relpath --> common_basepath --> fullfilec
+- fileset --> dirset
 
 
 Possible future functionality
 -----------------------------
 
-abspath     Calculate absolute from relative paths, including . and .. resolve, include resetting file separators platform-dependently
-path_join   ; on windows : on unix
-path_expand ; on windows : on unix
-isdirempty
-paths       Wrapper for MATLAB path function, but returning and receiving helpful cell arrays
+- abspath     Calculate absolute from relative paths, including . and .. resolve, include resetting file separators platform-dependently
+- path_join   ; on windows : on unix
+- path_expand ; on windows : on unix
+- isdirempty
+- paths       Wrapper for MATLAB path function, but returning and receiving helpful cell arrays
 
 
 TODO
