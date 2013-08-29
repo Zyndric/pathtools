@@ -41,6 +41,7 @@ Possible future functionality
 - path_expand ; on windows : on unix
 - isdirempty
 - paths       Wrapper for MATLAB path function, but returning and receiving helpful cell arrays
+- path_elements Tokenize given path into all constituents, using only fileparts.
 
 
 TODO
