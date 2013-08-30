@@ -10,7 +10,7 @@ function [testcases, failure] = single_suite(name)
     failure = false;
 
     try
-        name();
+        eval(name);
     catch err
         failure = true;
         disp(getReport(err));
