@@ -6,15 +6,11 @@
 function all_suites
 
     testdir = fileparts(mfilename('fullpath'));
-    srcdir = fullfile(fileparts(testdir), 'src');
 
-    % switch off stub warnings
-    oldwarnstate = warning('off', 'MATLAB:dispatcher:nameConflict');
-    
-    % save path state and add srcdir and testdir to it
+    % save path state and add testdir in order to find single_suite
     oldpath = path;
-    addpath(testdir, srcdir);
-
+    addpath(testdir);
+    
     % TODO: dynamically determine test suites
     suites = { ...
         'test_common_basepath', ...
@@ -37,9 +33,6 @@ function all_suites
     else
         fprintf('%d test suites failed.\n', failures);
     end
-    
+
     % restore old path
     path(oldpath);
-
-    % restore warn state
-    warning(oldwarnstate);
