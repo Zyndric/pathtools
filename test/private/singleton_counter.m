@@ -6,7 +6,7 @@ function value = singleton_counter(name, cmd)
     % init persistent counters structure
     persistent counters;
     if isempty(counters)
-        counters = struct('name', 0);
+        counters = struct(name, 0);
     end
 
     % create resetted counter if not existant
