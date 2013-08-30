@@ -18,7 +18,7 @@ function [testcases, failure] = single_suite(name)
 
     testcases = singleton_counter('testcase', 'reset');
 
-    outstring = sprintf('%20s:%3d tests run', name, testcases);
+    outstring = sprintf('%24s:%3d tests run', name, testcases);
     if failure
         outstring = [outstring ' with FAILURE'];
     end
