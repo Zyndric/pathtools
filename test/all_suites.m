@@ -3,7 +3,7 @@
 % Copyright (c) 2013, Alexander Roehnsch
 % Released under the terms of the BSD 2-Clause License (FreeBSD license)
 % http://opensource.org/licenses/BSD-2-Clause
-function all_tests
+function all_suites
 
     testdir = fileparts(mfilename('fullpath'));
     srcdir = fullfile(fileparts(testdir), 'src');
