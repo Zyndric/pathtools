@@ -44,9 +44,15 @@ Possible future functionality
 - path_elements Tokenize given path into all constituents, using only fileparts.
 
 
+Unit tests
+----------
+
+pathtools feature a light-weight test framework. It counts expect_from calls in
+test_*.m functions in the test folder. Execute one test_*.m suite by calling
+single_suite, or all test suites by calling all_suites.
+
+
 TODO
 ----
 
 - Function documentation
-- Test cases
-- light-weight test framework by expanding expect_from into state collecting test case executor

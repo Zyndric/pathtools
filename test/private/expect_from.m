@@ -13,8 +13,11 @@ function expect_from(varargin)
     [actual{:}] = varargin{1}();
     expected = varargin(2:end);
     
+    % count testcases up
+    singleton_counter('testcase');
+
+    % check for equality with expected output
     equals = cellfun(@isequal, actual, expected);
-    
     if ~all(equals)
         error('Expected %s did not match actual %s on positions %s.', string(expected), string(actual), string(double(equals)));
     end

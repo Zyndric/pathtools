@@ -61,22 +61,6 @@ expect_from(@() dirset('bar'), ...
 
 expect_error(@() dirset('invalid'));
 
-disp('dirset: 11 tests run.');
-
 
 % shutdown, restore old path
 path(oldpath);
-
-
-function expect_error(fun)
-
-    bCaught = false;
-    try
-        fun();
-    catch
-        bCaught = true;
-    end
-    
-    if ~bCaught
-        error('Error expected, but none occurred.');
-    end

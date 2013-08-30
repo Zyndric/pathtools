@@ -58,8 +58,5 @@ expect_from(@() fileset('non-existing-bogus', 'bar'), {});
 
 expect_from(@() fileset('*.txt', ''), txts_relative);
 
-disp('fileset: 27 tests run.');
-
-
 % shutdown, restore old path
 path(oldpath);

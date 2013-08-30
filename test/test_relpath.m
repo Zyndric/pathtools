@@ -9,6 +9,5 @@ function test_relpath
 expect_from(@() relpath('foo/bar', 'foo/moo/nuf'), ...
     {['..' filesep 'moo' filesep 'nuf']});
 
-expect_from(@() relpath(''));
-
-disp('relpath: 1 test run.');
+expect_from(@() relpath('', ''), '');
+expect_from(@() relpath('', 'abc'), 'abc');
