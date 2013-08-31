@@ -56,3 +56,4 @@ TODO
 ----
 
 - Function documentation
+- Wrap function call in expect_from with try block. Catch exception and count as error. Count inconsistencies in results as failure. This lets test suites continue even though one of their test cases fails. Also capture output via evalc and report. By defining an expect_from call as test case, we are saved from parsing the subfunction list. We have no proper test case names though.
