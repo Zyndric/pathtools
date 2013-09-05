@@ -1,10 +1,14 @@
 % Execute a single test suite.
 % Give the suite name as first argument.
+% You may give any number of directories as following arguments that will be
+% temporarily added to the path.
 
 % Copyright (c) 2013, Alexander Roehnsch
 % Released under the terms of the BSD 2-Clause License (FreeBSD license)
 % http://opensource.org/licenses/BSD-2-Clause
-function suite_info = single_suite(name)
+function suite_info = single_suite(name, paths)
+
+    if nargin < 2, paths = {}; end
 
     % init proper suite_info structure
     suite_info = struct(...
@@ -24,9 +28,11 @@ function suite_info = single_suite(name)
     % switch off stub warnings
     oldwarnstate = warning('off', 'MATLAB:dispatcher:nameConflict');
     
-    % save path state and add srcdir and testdir to it
+    % save path state and add any dependency dirs the user specified
     oldpath = path;
-    addpath(testdir, srcdir);
+    if ~isempty(paths)
+        addpath(paths{:});
+    end
 
     % reset suite information
     testcase_collector('reset');

@@ -3,9 +3,10 @@
 % Copyright (c) 2013, Alexander Roehnsch
 % Released under the terms of the BSD 2-Clause License (FreeBSD license)
 % http://opensource.org/licenses/BSD-2-Clause
-function all_suites
+function all_suites(testdir)
 
-    testdir = fileparts(mfilename('fullpath'));
+    % guess current directory as testdir
+    if nargin == 0, testdir = pwd; end
 
     % save path state and add testdir in order to find single_suite
     oldpath = path;
