@@ -7,21 +7,34 @@ function expect_from(varargin)
 
     % first argument is the function itself, rest are output arguments
     nargs = numel(varargin)-1;
+
+    tc = testcase_struct('');
     
     actual = cell(1,nargs);
-    % TODO: wrap in try catch block
-    [actual{:}] = varargin{1}();
+    try
+        tic;
+        % evalc works on the local workspace
+        [tc.cmdout, actual{:}] = evalc('varargin{1}()');
+        tc.time = toc;
+    catch me
+        tc.time = toc;
+        tc.error = true;
+        tc.message = me.getReport();
+    end
     expected = varargin(2:end);
     
-    % count testcases up
-    singleton_counter('testcase');
-
-    % check for equality with expected output
-    equals = cellfun(@isequal, actual, expected);
-    if ~all(equals)
-        error('Expected %s did not match actual %s on positions %s.', string(expected), string(actual), string(double(equals)));
+    if ~tc.error
+        % check for equality with expected output
+        equals = cellfun(@isequal, actual, expected);
+        if ~all(equals)
+            tc.fail = true;
+            tc.message = sprintf('Expected %s did not match actual %s on output arguments %s.', string(expected), string(actual), string(double(equals)));
+        end
     end
-    
+
+    % add testcase
+    testcase_collector(tc);
+
     
 function str = string(value)
 

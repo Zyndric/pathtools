@@ -49,11 +49,21 @@ Unit tests
 
 pathtools feature a light-weight test framework. It counts expect_from calls in
 test_*.m functions in the test folder. Execute one test_*.m suite by calling
-single_suite, or all test suites by calling all_suites.
+single_suite, or all test suites by calling all_suites. Lute distinguishes
+errors and failures. Failures are non-matches between actual and expected output
+in expect_* calls. Errors are thrown by the functions given to expect_*
+themselves.
+
+Standard output will be collected. Also, error and failure messages get
+collected.
+
+By defining an expect_from call as test case, we are saved from parsing the
+subfunction list. We have no proper test case names though.
 
 
 TODO
 ----
 
 - Function documentation
-- Wrap function call in expect_from with try block. Catch exception and count as error. Count inconsistencies in results as failure. This lets test suites continue even though one of their test cases fails. Also capture output via evalc and report. By defining an expect_from call as test case, we are saved from parsing the subfunction list. We have no proper test case names though.
+- make expect_error testcase-collector aware
+- handle testsuite errors outside exepct_* calls cleverly

@@ -21,18 +21,25 @@ function all_suites
         };
 
     % execute test suites
-    [testcases_in_suites, failflags] = cellfun(@single_suite, suites);
+    suite_infos = cellfun(@single_suite, suites);
     
     % output summary
     fprintf('Executed %d test cases in %d test suites.\n', ...
-        sum(testcases_in_suites), ...
-        numel(testcases_in_suites));
-    failures = sum(double(failflags));
-    if failures == 0
-        disp('No test suites failed.')
+        sum([suite_infos.testcases]), ...
+        numel(suite_infos));
+    failures = sum([suite_infos.failures]);
+    errors = sum([suite_infos.errors]);
+    if failures == 0 && errors == 0
+        disp('All suites successfull.')
     else
-        fprintf('%d test suites failed.\n', failures);
+        if failures ~= 0
+            fprintf('%d test suites failed.\n', failures);
+        end
+        if errors ~= 0
+            fprintf('%d test suites had errors.\n', errors);
+        end
     end
+    fprintf('Execution time: %.2f s.\n', sum([suite_infos.time]));
 
     % restore old path
     path(oldpath);
