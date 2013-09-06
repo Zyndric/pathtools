@@ -47,18 +47,21 @@ Possible future functionality
 Unit tests
 ----------
 
-pathtools feature a light-weight test framework. It counts expect_from calls in
-test_*.m functions in the test folder. Execute one test_*.m suite by calling
-single_suite, or all test suites by calling all_suites. Lute distinguishes
-errors and failures. Failures are non-matches between actual and expected output
-in expect_* calls. Errors are thrown by the functions given to expect_*
-themselves.
+pathtools features the Light-weight Unit Test Evaluator for MATLAB (LUTE).
+Lute treats each call to one of its expect_* functions as test case. This seems
+a little awkward at first, but allows easy, boilerplate-free testing in MATLAB.
 
-Standard output will be collected. Also, error and failure messages get
-collected.
+A Lute test suite is a single MATLAB function or script file called test_*.m.
+Therein, make your initialization, call a succession of expect_*, and that's it.
+Execute your suite by using single_suite(), or all suites in a directory by
+using all_suites(). These functions will give you an overview as well as details
+about any errors or failures. Standard output will not show on the MATLAB
+console, but will be collected for later display.
 
-By defining an expect_from call as test case, we are saved from parsing the
-subfunction list. We have no proper test case names though.
+Lute happily omits these features:
+  - test case names
+  - nasty test source parsing in order to get a handle on subfunctions
+  - jUnit XML generation
 
 
 TODO
