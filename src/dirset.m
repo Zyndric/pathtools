@@ -15,7 +15,7 @@ function absdirs = dirset(basedir, depth_first)
     % check non-empty dirs for existence; an empty basedir will be handled like
     % pwd, but yielding relative paths
     if ~isempty(basedir) && exist(basedir, 'dir') ~= 7
-        error('%s does not exist.', basedir);
+        error('PATHTOOLS:missingDir', '%s does not exist.', basedir);
     end
 
     % go depth_first by default

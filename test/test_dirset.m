@@ -59,7 +59,7 @@ expect_from(@() dirset(bar_dir), ...
 expect_from(@() dirset('bar'), ...
     bar_relative);
 
-expect_error(@() dirset('invalid'));
+expect_error(@() dirset('invalid'), 'PATHTOOLS:missingDir');
 
 
 % shutdown, restore old path
