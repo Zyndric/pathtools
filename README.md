@@ -59,7 +59,7 @@ about any errors or failures. Standard output will not show on the MATLAB
 console, but will be collected for later display.
 
 Lute happily omits these features:
-  - test case names
+  - explicit test case names
   - nasty test source parsing in order to get a handle on subfunctions
   - jUnit XML generation
 
@@ -67,6 +67,14 @@ Lute happily omits these features:
 TODO
 ----
 
-- Function documentation
-- make expect_error testcase-collector aware
+pathtools
+
+- function documentation
+
+
+Lute
+
 - handle testsuite errors outside exepct_* calls cleverly
+- actually report error and failure details
+- display some rendition of the function string as test case name
+- calculate the file and line where a failed expect_* call was made from
