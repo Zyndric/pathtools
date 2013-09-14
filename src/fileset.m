@@ -3,14 +3,19 @@
 %   strings that match actual files in the file system. name_filter is a
 %   file pattern string, i.e. '*.mat'. basedir is the directory to search in.
 %
+%   name_filter should only contain file name patterns, not directories like in
+%   'src/*.m'. While this should work, it is hard to predict its behaviour.
+%   Basically, you are looking for *.m files in all subdirs named 'src',
+%   regardless of their nesting depth. Use with caution.
+%
+%   name_filter must always contain file name patterns or be empty. Use '', '*',
+%   or '*.*' if you are looking for all files. Use basedir if you want to look
+%   in a specific directory.
+%
 %   FP = FILESET(name_filter) will do the same, but in the current working
 %   directory.
 %
 %   FP = FILESET() will find all files in the current working directory.
-%
-%   Be careful when name_filter contains directories, e.g. 'src/*.m', because
-%   FILESET will return the *.m files of all src folders anywhere in the child
-%   tree of basedir.
 %
 %   See also dirset, dir.
 
@@ -47,8 +52,14 @@ function paths = find_files_plain(directory, name_filter)
 
     % get items
     items = dir(fullfile(directory, name_filter));
-    
     file_items = items(~[items.isdir]);
     
+    % name_filter might contain directories, which need be prepended to the
+    % names of the found files
+    filter_rel_dir = '';
+    if ~isempty(name_filter)
+        filter_rel_dir = fileparts(name_filter);
+    end
+
     % prepend by directory name
-    paths = arrayfun(@(item) fullfile(directory, item.name), file_items, 'UniformOutput', false);
+    paths = arrayfun(@(item) fullfile(directory, filter_rel_dir, item.name), file_items, 'UniformOutput', false);

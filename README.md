@@ -67,11 +67,6 @@ Lute happily omits these features:
 TODO
 ----
 
-pathtools
-
-- Fix: fileset('src/*.m') on pathtool's directory calculates paths without src.
-
-
 Lute
 
 - handle testsuite errors outside expect_* calls cleverly
