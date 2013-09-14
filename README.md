@@ -67,6 +67,10 @@ Lute happily omits these features:
 TODO
 ----
 
+pathtools
+
+- Fix: common_basedir sometimes returns [] instead of '' when refpath is empty.
+
 Lute
 
 - handle testsuite errors outside expect_* calls cleverly

@@ -16,3 +16,6 @@ expect_from(@() relpath('', 'abc'), {'abc'});
 % no common base
 expect_from(@() relpath('foo/foo', 'bar/bar'), ...
     {['..' filesep '..' filesep 'bar' filesep 'bar']});
+
+% identical paths
+expect_from(@() relpath('foo/bar', 'foo/bar'), {''});
