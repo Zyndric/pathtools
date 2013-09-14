@@ -1,14 +1,24 @@
-% Calculate relative paths between given paths.
-% If base is a direct parent of a target, target will be truncated by base.
-% Take care that from_dirs and to_dirs either are all absolute paths, or are
-% all relative paths in regard to the very same base dir. If one path of a
-% from_dir to_dir pair is absolute, but the other relative, no common path can
-% be found and the resulting path will go up all of from_dir and then
-% down all of to_dir.
-% relpath does not recognize '.' and '..' markers in the input arguments
-% themselves. relpath does not rely on actual existing files or directories,
-% it just computes differences in path strings. Therefore, never will relpath
-% assume pwd to be a base of any path.
+%RELPATH Calculate relative paths between given paths.
+%   R = RELPATH(F,T) calculates the relative path R, that leads from path F
+%   to path T, e.g. F='/home/foo', T='/home/bar', R='../bar'. F and T may be
+%   single strings or cell arrays of strings. If both are cell arrays, they
+%   must be of the same size or of length 1. R is a cell array of strings.
+%
+%   If a from-path (F) is a direct parent of a to-path T, the relative path R
+%   will be T truncated by F.
+%
+%   Take care that from-paths and to-paths either are all absolute paths, or are
+%   all relative paths in regard to the very same base dir. If one path of a
+%   from-path to-path pair is absolute, but the other relative, no common path
+%   will be found and the resulting path will go up all of from-path and then
+%   down all of to-path.
+%
+%   RELPATH does not recognize '.' and '..' markers in the input arguments
+%   themselves. RELPATH does not rely on actual existing files or directories,
+%   it just computes differences in path strings. Therefore, never will it
+%   assume pwd to be a base of any path.
+%
+%   See also common_basepath.
 
 % Copyright (c) 2013, Alexander Roehnsch
 % Released under the terms of the BSD 2-Clause License (FreeBSD license)
@@ -69,7 +79,9 @@ function relpath = calculate_updown_path(diff_cell)
     base2from = diff_cell{1};
     base2target = diff_cell{2};
     
-    % invert base2from direction by replacing its path items with '..'
+    % Invert base2from direction by replacing its path items with '..'.
+    % Do this as safely as possible, i.e. by only using fileparts for
+    % tokenizing and fullfile for concatenating.
     from2base = unfoldr_reduce(@path_parentizer, base2from);
     
     % append by target relative path
@@ -95,8 +107,8 @@ function [parentized_path, remaining_path, hasended] = path_parentizer(parentize
 % Cheap, iterative Hylomorphism: combines an unfold with a fold/reduce.
 % Because we can.
 % Produces a single result, calculated by reduce from an intermediate list that
-% is expanded by unfold from a seed. No actual intermediate list will be
-% constructed, however. That depends on fun's internal implementation.
+% is expanded by unfold from a seed. No actual intermediate list need be
+% constructed, however. It depends on fun's internal implementation.
 % fun must be a function of two arguments, the result of the unfold_fold so far,
 % and the seed. fun must yield three output arguments, the new result, the new
 % seed and a boolean true if this was the last computation step or false not.

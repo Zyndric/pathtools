@@ -69,12 +69,12 @@ TODO
 
 pathtools
 
-- function documentation
+- Fix: fileset('src/*.m') on pathtool's directory calculates paths without src.
 
 
 Lute
 
-- handle testsuite errors outside exepct_* calls cleverly
+- handle testsuite errors outside expect_* calls cleverly
 - improve report of error and failure details
 - display some rendition of the function string as test case name
 - calculate the file and line where a failed expect_* call was made from

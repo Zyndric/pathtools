@@ -1,4 +1,11 @@
-% Calculate base path common to several given paths.
+%COMMON_BASEPATH Calculate the common base of several given paths.
+%   B = COMMON_BASEPATH(P) calculates the base path B that is common to all
+%   paths in the cell array of strings P.
+%
+%   [B, R] = COMMON_BASEPATH(P) will do the same, with R being the relative
+%   remainders of P after truncating their common base B.
+%
+%   See also fullfilec.
 
 % Copyright (c) 2013, Alexander Roehnsch
 % Released under the terms of the BSD 2-Clause License (FreeBSD license)

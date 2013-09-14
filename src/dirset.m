@@ -1,9 +1,15 @@
-% Return list of directories, recursively.
-% If basedir is not provided or empty, pwd is used instead.
-% If basedir is provided, it must exist.
-% Result is a column vector cell array.
+%DIRSET Find directories, recursively.
+%   D = DIRSET(basedir) returns a cell array of path strings
+%   that match all directories that lie beneath basedir, including basedir.
+%   basedir must exist.
 %
-% See: dir
+%   D = DIRSET() or D = DIRSET('') will do the same, but in the current working
+%   directory.
+%
+%   D = DIRSET(basedir, depth_first) will do the same, using depth first search
+%   if depth_first is true, or breadth first search, of depth_first is false.
+%
+%   See also dir.
 
 % Copyright (c) 2013, Alexander Roehnsch
 % Released under the terms of the BSD 2-Clause License (FreeBSD license)

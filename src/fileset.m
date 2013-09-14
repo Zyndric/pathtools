@@ -1,6 +1,18 @@
-% Return list of files that match a pattern, recursing directories.
+%FILESET Find files that match a pattern, recursing directories.
+%   FP = FILESET(name_filter, basedir) returns a cell array of path
+%   strings that match actual files in the file system. name_filter is a
+%   file pattern string, i.e. '*.mat'. basedir is the directory to search in.
 %
-% See: dirset, dir
+%   FP = FILESET(name_filter) will do the same, but in the current working
+%   directory.
+%
+%   FP = FILESET() will find all files in the current working directory.
+%
+%   Be careful when name_filter contains directories, e.g. 'src/*.m', because
+%   FILESET will return the *.m files of all src folders anywhere in the child
+%   tree of basedir.
+%
+%   See also dirset, dir.
 
 % Copyright (c) 2013, Alexander Roehnsch
 % Released under the terms of the BSD 2-Clause License (FreeBSD license)
@@ -29,7 +41,8 @@ function filepaths = fileset(name_filter, basedir)
         filepaths = {};
     end
     
-    
+
+% Find files by name_filter in a specific directory. Plain, non-recursive.
 function paths = find_files_plain(directory, name_filter)
 
     % get items
