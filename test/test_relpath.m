@@ -9,5 +9,10 @@ function test_relpath
 expect_from(@() relpath('foo/bar', 'foo/moo/nuf'), ...
     {['..' filesep 'moo' filesep 'nuf']});
 
-expect_from(@() relpath('', ''), '');
-expect_from(@() relpath('', 'abc'), 'abc');
+% empty from-path should yield to-path
+expect_from(@() relpath('', ''), {''});
+expect_from(@() relpath('', 'abc'), {'abc'});
+
+% no common base
+expect_from(@() relpath('foo/foo', 'bar/bar'), ...
+    {['..' filesep '..' filesep 'bar' filesep 'bar']});

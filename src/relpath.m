@@ -25,7 +25,14 @@
 % http://opensource.org/licenses/BSD-2-Clause
 function relpaths = relpath(from_dirs, to_dirs)
     
-    if isempty(from_dirs), relpaths = to_dirs; return; end
+    if isempty(from_dirs)
+        relpaths = to_dirs;
+        % enforce cell array output for consistent return values
+        if ~iscell(relpaths)
+            relpaths = {relpaths};
+        end
+        return;
+    end
     if isempty(to_dirs), to_dirs = ''; end
 
     % force cell wrap
