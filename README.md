@@ -44,10 +44,24 @@ Possible future functionality
 - path_elements Tokenize given path into all constituents, using only fileparts.
 
 
-Unit tests
-----------
+Hacking
+-------
 
-pathtools features the Light-weight Unit Test Evaluator for MATLAB (LUTE).
+For cloning pathtools use this shell command:
+
+    >> git clone git@github.com:Zyndric/pathtools.git
+
+pathtools uses the Light-weight Unit Test Evaluator for MATLAB (LUTE). You have
+to pull it in as a git submodule like so:
+
+    >> cd pathtools
+    >> git submodule init
+    >> git submodule update
+
+Run all unit tests by executing all_tests.m in the base directory. Run one
+single test suite by calling single_suite('test_name') with lute/, src/ and
+test/ one the MATLAB path.
+
 Lute treats each call to one of its expect_* functions as test case. This seems
 a little awkward at first, but allows easy, boilerplate-free testing in MATLAB.
 
@@ -58,22 +72,9 @@ using all_suites(). These functions will give you an overview as well as details
 about any errors or failures. Standard output will not show on the MATLAB
 console, but will be collected for later display.
 
-Lute happily omits these features:
-  - explicit test case names
-  - nasty test source parsing in order to get a handle on subfunctions
-  - jUnit XML generation
 
 
 TODO
 ----
 
-pathtools
-
 - Fix: common_basedir sometimes returns [] instead of '' when refpath is empty.
-
-Lute
-
-- handle testsuite errors outside expect_* calls cleverly
-- improve report of error and failure details
-- display some rendition of the function string as test case name
-- calculate the file and line where a failed expect_* call was made from
