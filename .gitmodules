@@ -1,0 +1,3 @@
+[submodule "lute"]
+	path = lute
+	url = git@github.com:Zyndric/lute.git

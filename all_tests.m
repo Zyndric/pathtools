@@ -4,7 +4,7 @@ function all_tests
     basedir = fileparts(build_dir);
 
     % define lute, source and test dirs
-    lute_dir = fullfile(basedir, 'builddeps', 'lute');
+    lute_dir = fullfile(basedir, 'lute');
     src_dir = fullfile(basedir, 'src');
     test_dir = fullfile(basedir, 'test');
 
