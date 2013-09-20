@@ -1,7 +1,6 @@
 function all_tests
 
-    build_dir = fileparts(mfilename('fullpath'));
-    basedir = fileparts(build_dir);
+    basedir = fileparts(mfilename('fullpath'));
 
     % define lute, source and test dirs
     lute_dir = fullfile(basedir, 'lute');
@@ -17,3 +16,4 @@ function all_tests
 
     % restore path
     path(oldpath);
+
