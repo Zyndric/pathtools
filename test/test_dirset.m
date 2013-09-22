@@ -25,6 +25,9 @@ bar_relative = {'bar'; ['bar' filesep 'moo']};
 bar_absolute = fullfilec(pwd_dir, bar_relative);
 
 
+% switch off stub warnings
+oldwarnstate = warning('off', 'MATLAB:dispatcher:nameConflict');
+    
 % setup, save path state and temporarily add stubs path
 testdir = fileparts(mfilename('fullpath'));
 stubdir = fullfile(testdir, 'dirset_stubs');
@@ -64,3 +67,7 @@ expect_error(@() dirset('invalid'), 'PATHTOOLS:missingDir');
 
 % shutdown, restore old path
 path(oldpath);
+ 
+% restore warn state
+warning(oldwarnstate);
+

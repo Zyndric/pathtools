@@ -21,6 +21,10 @@ files_bar = {['bar' filesep '.txt']};
 
 txts_relative = {'.temp.txt'; 'abc.txt'; ['bar' filesep '.txt']};
 
+
+% switch off stub warnings
+oldwarnstate = warning('off', 'MATLAB:dispatcher:nameConflict');
+    
 % setup, save path state and temporarily add stubs path
 testdir = fileparts(mfilename('fullpath'));
 stubdir = fullfile(testdir, 'dirset_stubs');
@@ -60,3 +64,7 @@ expect_from(@() fileset('*.txt', ''), txts_relative);
 
 % shutdown, restore old path
 path(oldpath);
+
+% restore warn state
+warning(oldwarnstate);
+
