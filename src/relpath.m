@@ -89,7 +89,7 @@ function relpath = calculate_updown_path(diff_cell)
     % Invert base2from direction by replacing its path items with '..'.
     % Do this as safely as possible, i.e. by only using fileparts for
     % tokenizing and fullfile for concatenating.
-    from2base = unfoldr_reduce(@path_parentizer, base2from);
+    from2base = unfoldr_reduce(@path_parentizer, '', base2from);
     
     % append by target relative path
     relpath = fullfile(from2base, base2target);
