@@ -53,7 +53,10 @@ function [basepath, relpaths] = common_basepath(paths)
     token_columns = num2cell(pathmatrix(:,idx_differences_start:end), 1);
     switch numel(token_columns)
         case 0
+            % In case of no remaining relative path tokens, fullfilec would give
+            % just one empty string. We need an empty string for each of paths.
             relpaths_raw = cell(size(paths));
+            [relpaths_raw{:}] = deal('');
         case 1
             relpaths_raw = [token_columns{:}];
         otherwise
@@ -96,3 +99,4 @@ function list = unfoldl(fun, seed)
 function list = unfoldr(fun, seed)
 
     list = fliplr(unfoldl(fun, seed));
+
