@@ -59,22 +59,14 @@ to pull it in as a git submodule like so:
     >> git submodule update
 
 Run all unit tests by executing all_tests.m in the base directory. Run one
-single test suite by calling single_suite('test_name') with lute/, src/ and
-test/ one the MATLAB path.
+single test suite by calling its name, e.g. '>> test_relpath' with lute/, src/
+and test/ on the MATLAB path.
 
 Lute treats each call to one of its expect_* functions as test case. This seems
 a little awkward at first, but allows easy, boilerplate-free testing in MATLAB.
 
 A Lute test suite is a single MATLAB function or script file called test_*.m.
 Therein, make your initialization, call a succession of expect_*, and that's it.
-Execute your suite by using single_suite(), or all suites in a directory by
-using all_suites(). These functions will give you an overview as well as details
-about any errors or failures. Standard output will not show on the MATLAB
-console, but will be collected for later display.
+Standard output will not show on the MATLAB console, but will be collected for
+later display.
 
-
-
-TODO
-----
-
-- Fix: common_basedir sometimes returns [] instead of '' when refpath is empty.
