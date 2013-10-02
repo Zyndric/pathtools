@@ -6,5 +6,5 @@ function setup
     src_dir = fullfile(basedir, 'src');
     test_dir = fullfile(basedir, 'test');
 
-    addpath(lute_dir, src_dir, test_dir);
+    addpath(basedir, lute_dir, src_dir, test_dir);
 
