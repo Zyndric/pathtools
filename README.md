@@ -36,7 +36,8 @@ distribute along other projects. Nevertheless, these dependencies exist:
 Possible future functionality
 -----------------------------
 
-- abspath     Calculate absolute from relative paths, including . and .. resolve, include resetting file separators platform-dependently
+- abspath     Calculate absolute from relative paths, including . and .. resolve, include resetting file separators platform-dependently. Much like Simon's GetFullPath, really.
+- isabspath
 - path_join   ; on windows : on unix
 - path_expand ; on windows : on unix
 - isdirempty

@@ -13,9 +13,20 @@ expect_from(@() relpath('foo/bar', 'foo/moo/nuf'), ...
 expect_from(@() relpath('', ''), {''});
 expect_from(@() relpath('', 'abc'), {'abc'});
 
-% no common base
+% empty to-path should yield empty relpath
+expect_from(@() relpath('foo/bar', ''), {''});
+
+% without common base
+full_route = {['..' filesep '..' filesep 'bar' filesep 'bar']};
 expect_from(@() relpath('foo/foo', 'bar/bar'), ...
-    {['..' filesep '..' filesep 'bar' filesep 'bar']});
+    full_route);
+
+% should yield the same results with or without leading abspath markers,
+% i.e. C:\ or /.
+expect_from(@() relpath('/foo/foo', 'bar/bar'), ...
+    full_route);
+expect_from(@() relpath('foo/foo', 'c:\bar/bar'), ...
+    full_route);
 
 % identical paths
 expect_from(@() relpath('foo/bar', 'foo/bar'), {''});

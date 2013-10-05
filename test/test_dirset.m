@@ -70,4 +70,3 @@ path(oldpath);
  
 % restore warn state
 warning(oldwarnstate);
-
