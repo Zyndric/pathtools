@@ -5,11 +5,13 @@
 % http://opensource.org/licenses/BSD-2-Clause
 function test_pathsplit
 
-% empty cell from empty input
+% empty cell from no input
 expect_from(@() pathsplit(), {});
-expect_from(@() pathsplit(''), {});
-expect_from(@() pathsplit([]), {});
-expect_from(@() pathsplit({}), {});
+
+% empty cell string from empty input
+expect_from(@() pathsplit(''), {''});
+expect_from(@() pathsplit([]), {''});
+expect_from(@() pathsplit({}), {''});
 
 % return single items
 expect_from(@() pathsplit('.'), {'.'});

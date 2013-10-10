@@ -20,8 +20,10 @@
 function pathcell = pathsplit(pathstring)
     
     % textscan fails on empty strings
-    if nargin == 0 || isempty(pathstring)
+    if nargin == 0
         pathcell = {};
+    elseif isempty(pathstring)
+        pathcell = {''};
     else
         % textscan returns a cell array of possible results, because pathstring
         % could be a cell; take first item only, since we provide a single string
