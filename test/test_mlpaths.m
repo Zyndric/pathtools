@@ -25,14 +25,16 @@ altpathc = pathsplit(altpath);
 
 
 % paths returns path as cell array
-expect_from(@() paths(), mlpathc);
+expect_from(@() mlpaths(), mlpathc);
 
 % try also controlledly set the path
 expect_from(@() set_get_restore_paths(mlpathc), mlpath, mlpathc);
 expect_from(@() set_get_restore_paths(altpathc), altpath, altpathc);
 
-% for single string input, behaviour should be identical to MATLAB's path
+% internally, should have mlpath setting from the start
 expect_from(@() set_get_restore_paths, mlpath, mlpathc);
+
+% for single string input, behaviour should be identical to MATLAB's path
 expect_from(@() set_get_restore_paths(''), '', {''}); % don't try this unstubbed
 expect_from(@() set_get_restore_paths(mlpath), mlpath, mlpathc);
 expect_from(@() set_get_restore_paths(altpath), altpath, altpathc);
@@ -53,17 +55,18 @@ warning(oldwarnstate);      % restore warn state
 % outputs can be compared and verfied.
 function [pstring, pcell] = set_get_restore_paths(pin)
 
+    oldpathstring = path();
+
     % set path
     if nargin >= 1
-        oldpath = mlpaths(pin);
+        pcell = mlpaths(pin);
     else
-        % without args, path is refreshed
-        oldpath = mlpaths();
+        pcell = mlpaths();
     end
 
     % get path as MATLAB's path string and as path cell array
     pstring = path();
-    pcell = mlpaths();
 
     % restore path
-    mlpaths(oldpath);
+    path(oldpathstring);
+
