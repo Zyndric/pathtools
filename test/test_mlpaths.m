@@ -10,7 +10,8 @@ function test_mlpaths
 oldwarnstate = warning('off', 'MATLAB:dispatcher:nameConflict');
 testdir = fileparts(mfilename('fullpath'));
 stubdir = fullfile(testdir, 'paths_stubs');
-oldpath = builtin('path');     % save path state
+% save path state; careful: path itself will be shadowed
+oldpath = builtin('matlabpath');
 addpath(stubdir);   % temporarily add stubs path
 
 
@@ -41,7 +42,7 @@ expect_from(@() set_get_restore_paths({mlpath, altpath}), [mlpath pathsep altpat
 
 
 % revert stubbing
-builtin('path', oldpath);   % restore actual MATLAB path
+builtin('matlabpath', oldpath);   % restore actual MATLAB path; path shadowed
 warning(oldwarnstate);      % restore warn state
 
 

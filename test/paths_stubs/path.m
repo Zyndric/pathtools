@@ -10,7 +10,7 @@ function pold = path(pin)
 
     % if first call, actually take path from MATLAB
     if isempty(pathstate)
-        pathstate = builtin('path');
+        pathstate = builtin('matlabpath');
     end
 
     % output old path state first
