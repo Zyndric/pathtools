@@ -10,7 +10,7 @@ probably newer.
 
 The code comes unoptimized, but is written with functional paradigms in mind.
 Even though MATLAB and FP don't go well together, the code favors high-level
-functions, avoids state and tries to limit side effects to those required.
+functions and tries to limit state and side effects to those required.
 
 
 Existing functions
@@ -20,6 +20,9 @@ Existing functions
 - dirset          Return list of directories, recursively.
 - fileset         Return list of files that match a pattern, recursing directories.
 - fullfilec       Concatenate partial paths safely, on cell arrays.
+- mlpaths         Get/set MATLAB search path, using cell arrays.
+- pathjoin        Join several paths into one pathsep separated string.
+- pathsplit       Split pathsep separated string into several paths.
 - relpath         Calculate relative paths between given paths.
 
 
@@ -29,8 +32,9 @@ Mutual dependencies
 These functions try not to depend on each other, in order to use them in and
 distribute along other projects. Nevertheless, these dependencies exist:
 
-- relpath --> common_basepath --> fullfilec
-- fileset --> dirset
+    relpath --> common_basepath --> fullfilec
+    fileset --> dirset
+    mlpaths --> pathjoin, pathsplit
 
 
 Possible future functionality
@@ -38,10 +42,7 @@ Possible future functionality
 
 - abspath     Calculate absolute from relative paths, including . and .. resolve, include resetting file separators platform-dependently. Much like Simon's GetFullPath, really.
 - isabspath
-- path_join   ; on windows : on unix
-- path_expand ; on windows : on unix
 - isdirempty
-- paths       Wrapper for MATLAB path function, but returning and receiving helpful cell arrays
 - path_elements Tokenize given path into all constituents, using only fileparts.
 
 
@@ -70,4 +71,3 @@ A Lute test suite is a single MATLAB function or script file called test_*.m.
 Therein, make your initialization, call a succession of expect_*, and that's it.
 Standard output will not show on the MATLAB console, but will be collected for
 later display.
-

@@ -1,9 +1,9 @@
-% paths unit tests
+% mlpaths unit tests
 
 % Copyright (c) 2013, Alexander Roehnsch
 % Released under the terms of the BSD 2-Clause License (FreeBSD license)
 % http://opensource.org/licenses/BSD-2-Clause
-function test_paths
+function test_mlpaths
 
 % set up path stub, lest MATLAB gets confused with our path mangling
 % switch off stub warnings
@@ -17,10 +17,10 @@ addpath(stubdir);   % temporarily add stubs path
 % define test data
 % get current path as reference
 mlpath = path;
-mlpathc = path_expand(mlpath);
+mlpathc = pathsplit(mlpath);
 % define another path for comparison
 altpath = ['/some/arbitrary/path' pathsep '/foo/bar' pathsep 'also/relatives' pathsep '..'];
-altpathc = path_expand(altpath);
+altpathc = pathsplit(altpath);
 
 
 % paths returns path as cell array
@@ -35,6 +35,9 @@ expect_from(@() set_get_restore_paths, mlpath, mlpathc);
 expect_from(@() set_get_restore_paths(''), '', {''}); % don't try this unstubbed
 expect_from(@() set_get_restore_paths(mlpath), mlpath, mlpathc);
 expect_from(@() set_get_restore_paths(altpath), altpath, altpathc);
+
+% also, process cell array of multi-path strings into one whole collection
+expect_from(@() set_get_restore_paths({mlpath, altpath}), [mlpath pathsep altpath], vertcat(mlpathc, altpathc));
 
 
 % revert stubbing
@@ -51,15 +54,15 @@ function [pstring, pcell] = set_get_restore_paths(pin)
 
     % set path
     if nargin >= 1
-        oldpath = paths(pin);
+        oldpath = mlpaths(pin);
     else
         % without args, path is refreshed
-        oldpath = paths();
+        oldpath = mlpaths();
     end
 
     % get path as MATLAB's path string and as path cell array
     pstring = path();
-    pcell = paths();
+    pcell = mlpaths();
 
     % restore path
-    paths(oldpath);
+    mlpaths(oldpath);
