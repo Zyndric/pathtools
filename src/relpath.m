@@ -11,7 +11,9 @@
 %   all relative paths in regard to the very same base dir. If one path of a
 %   from-path to-path pair is absolute, but the other relative, no common path
 %   will be found and the resulting path will go up all of from-path and then
-%   down all of to-path.
+%   down all of to-path. Additionally, if on Windows, two absolute paths from
+%   different drives will not calculate correctly, because there is no relative
+%   path across drives in Windows.
 %
 %   RELPATH does not recognize '.' and '..' markers in the input arguments
 %   themselves. RELPATH does not rely on actual existing files or directories,
