@@ -20,7 +20,7 @@ expect_from(@() pathjoin({'foo/bar'}), 'foo/bar');
 % concat several items, may be multi-paths themselves
 expect_from(@() pathjoin({'foo', 'bar'}), ['foo' pathsep 'bar']);
 expect_from(@() pathjoin({'foo'; 'bar'}), ['foo' pathsep 'bar']);
-expect_from(@() pathjoin({'.', 'foo/bar', '..;/home'}), ...
+expect_from(@() pathjoin({'.', 'foo/bar', ['..' pathsep '/home']}), ...
     ['.' pathsep 'foo/bar' pathsep '..' pathsep '/home']);
 
 % empty strings will be joined anyway
