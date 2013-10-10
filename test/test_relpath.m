@@ -13,8 +13,8 @@ expect_from(@() relpath('foo/bar', 'foo/moo/nuf'), ...
 expect_from(@() relpath('', ''), {''});
 expect_from(@() relpath('', 'abc'), {'abc'});
 
-% empty to-path should yield empty relpath
-expect_from(@() relpath('foo/bar', ''), {''});
+% empty to-path should let relpath go up all of from-path
+expect_from(@() relpath('foo/bar', ''), {['..' filesep '..']});
 
 % without common base
 full_route = {['..' filesep '..' filesep 'bar' filesep 'bar']};
